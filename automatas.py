@@ -1,8 +1,11 @@
+# No sabemos si tendremos que separar en más tipos (como paréntesis, comillas)
 def tipo_caracter(caracter):
     if caracter.isalpha():
         return "letra"
     elif caracter.isdigit():
         return "digito"
+    elif caracter == "\"":
+        return "comilla"
     else:
         return "otro"
 
@@ -13,12 +16,14 @@ def es_identificador(cadena):
         {
             "letra": 1,
             "digito": 1,
+            "comilla": 3,
             "otro": 3
         },
         {
             "letra": 1,
             "digito": 1,
-            "otro": 2 
+            "comilla": 3,
+            "otro": 2
         }
     ]
 
@@ -39,12 +44,66 @@ def es_identificador(cadena):
             posicion_actual += 1
     except:
         pass
-    
-    if estado_actual == 2:
-        return True
-    else:
-        return False
 
-if __name__ == "__aaa__":
+    # retorna una tupla determinando si es_identificador como primer posición, y la posición a la que lo deja como segunda
+    if estado_actual == 2:
+        return (True, posicion_actual - 1)
+    else:
+        return (False, 0)
+
+
+def es_cadena(cadena):
+    estados = [
+        {
+            "letra": 5,
+            "digito": 5,
+            "comilla": 1,
+            "otro": 5,
+        },
+        {
+            "letra": 3,
+            "digito": 3,
+            "comilla": 2,
+            "otro": 3,
+        },
+        {
+            "letra": 4,
+            "digito": 4,
+            "comilla": 4,
+            "otro": 4,
+        },
+        {
+            "letra": 3,
+            "digito": 3,
+            "comilla": 2,
+            "otro": 3,
+        },
+    ]
+
+    posicion_actual = 0
+    caracter_actual = ''
+
+    estado_actual = 0
+
+    try:
+        while estado_actual not in (4,5):
+            caracter_actual = cadena[posicion_actual]
+            estado_actual = estados[estado_actual].get(tipo_caracter(caracter_actual)) 
+            posicion_actual += 1
+    except:
+        pass
+
+    if estado_actual == 4:
+        return (True, posicion_actual - 1)
+    else:
+        return (False, 0)
+
+
+
+if __name__ == "__main__":
     # Cómo aceptar una cadena que no termine en caracter especial ?? Ej: "Hola" que es distinto de "Hola "
-    print(es_identificador("hola"))
+    print(es_identificador(" hola mono"))
+    print(es_identificador("hola mono"))
+    cadena = "\"hola amiguito\")if algo"
+    posicion = es_cadena(cadena)[1]
+    print(cadena[posicion])
