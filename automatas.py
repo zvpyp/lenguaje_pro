@@ -6,6 +6,8 @@ def tipo_caracter(caracter):
         return "digito"
     elif caracter == "\"":
         return "comilla"
+    elif caracter == ".":
+        return "punto"
     else:
         return "otro"
 
@@ -68,7 +70,7 @@ def es_cadena(cadena):
         },
         {
             "letra": 4,
-            "digito": 4,
+            "digito": 4,  
             "comilla": 4,
             "otro": 4,
         },
@@ -96,14 +98,70 @@ def es_cadena(cadena):
     if estado_actual == 4:
         return (True, posicion_actual - 1)
     else:
-        return (False, 0)
+        return (False, estado_actual)
 
+def es_real(cadena):
+    estados = [
+        {
+            "letra": 4,
+            "digito": 1,
+            "comilla": 4,
+            "otro": 4,
+            "punto": 4,
+        },
+        {
+            "letra": 4,
+            "digito": 1,
+            "comilla": 4,
+            "otro": 4,
+            "punto": 2,
+        },
+        {
+            "letra": 4,
+            "digito": 3,  
+            "comilla": 4,
+            "otro": 4,
+            "punto": 4,
+        },
+        {
+            "letra": 4,
+            "digito": 3,
+            "comilla": 4,
+            "otro": 4,
+            "punto": 4,
+        },
+    ]
 
+    posicion_actual = 0
+    caracter_actual = ''
+
+    estado_actual = 0
+
+    try:
+        while estado_actual != 4 and posicion_actual <= len(cadena):
+            caracter_actual = cadena[posicion_actual]
+            estado_actual = estados[estado_actual].get(tipo_caracter(caracter_actual)) 
+            posicion_actual += 1
+    except:
+        pass
+
+    if estado_actual in (1,3):
+        return (True, posicion_actual - 1)
+    else:
+        return (False, estado_actual)
 
 if __name__ == "__main__":
     # Cómo aceptar una cadena que no termine en caracter especial ?? Ej: "Hola" que es distinto de "Hola "
-    print(es_identificador(" hola mono"))
-    print(es_identificador("hola mono"))
-    cadena = "\"hola amiguito\")if algo"
-    posicion = es_cadena(cadena)[1]
-    print(cadena[posicion])
+    #print(es_identificador(" hola mono"))
+    #print(es_identificador("hola mono"))
+    #cadena = "\"hola amiguito\")if algo"
+    #posicion = es_cadena(cadena)[1]
+    #print(cadena[posicion])
+
+    #print(es_cadena("\"aaaa\" ")) # "aaa"a
+
+    print(es_real("123"))
+    print(es_real("123.12"))
+    print(es_real("123."))
+    print(es_real(".12"))
+    print(es_real("1.a3"))
