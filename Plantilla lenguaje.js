@@ -59,9 +59,9 @@ body {
     asignacion ->       id = valor_asignado | id[exp_aritmetica] = valor_asignado
     valor_asignado ->   exp_aritmetica | arreglo
     arreglo ->          [elementos_array]
-    exp_aritmetica ->   const_real | id | (exp_aritmetica) | suma_algebraica exp_aritmetica // puede tener paréntesis
-    suma_algebraica ->  exp_aritmetica + | exp_aritmetica - | prod_algebraico
-    prod_algebraico ->  exp_aritmetica * | exp_aritmetica /
+    exp_aritmetica ->   exp_aritmetica + producto | exp_aritmetica - producto | producto// prioridad 3
+    producto ->         producto * numero | producto / numero | numero                  // prioridad 2
+    numero ->           id | const_real |(exp_aritmetica)                               // prioridad 1
     elementos_array     exp_aritmetica | exp_aritmetica, elementos_array
     lectura ->          read(cadena)
     escritura ->        write(args_escribir)

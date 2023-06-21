@@ -1,3 +1,5 @@
+import automatas
+
 tabla_simbolos = {
     'var' : 'SECCION_VARIABLES',
     'body': 'CUERPO', 
@@ -12,3 +14,39 @@ tabla_simbolos = {
     'read' : 'LECTURA',
     'write' : 'ESCRITURA',
 }
+
+def obtener_siguiente_comp_lex(fuente, control, tabla_simbolos):
+    fuente = fuente[control:].lstrip()
+
+    #print(fuente)
+    #print("\n\n\n")
+
+    nuevo_control = control
+    complex = ""
+
+    if automatas.es_identificador(fuente)[0]:
+        nuevo_control = automatas.es_identificador(fuente)[1]
+        tabla_simbolos.setdefault(fuente[:nuevo_control], "ID")
+        complex = "ID"
+    elif automatas.es_real(fuente)[0]:
+        nuevo_control = automatas.es_real(fuente)[1]
+        complex = "CONST_REAL"
+    elif automatas.es_cadena(fuente)[0]:
+        nuevo_control = automatas.es_cadena(fuente)[1]
+        complex = "CADENA"
+    
+     #print(f"{complex} : {fuente[:nuevo_control]}")
+
+    return (complex, nuevo_control, fuente)
+
+
+texto = open("aaa.txt").read()
+
+control = 0
+complex = ""
+for i in range(1, 5):
+    complex, control, texto = obtener_siguiente_comp_lex(texto, control, tabla_simbolos)
+    print(texto)
+    print("\n\n\n\n")
+
+# CONST_REAL 
