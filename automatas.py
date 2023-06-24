@@ -18,7 +18,7 @@ def es_identificador(cadena):
     estados = [
         {
             "letra": 1,
-            "digito": 1,
+            "digito": 3,
             "comilla": 3,
             "punto": 3,
             "otro": 3

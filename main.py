@@ -44,9 +44,9 @@ texto = open("aaa.txt").read()
 
 control = 0
 complex = ""
-for i in range(1, 5):
+for i in range(1, 8):
     complex, control, texto = obtener_siguiente_comp_lex(texto, control, tabla_simbolos)
-    print(texto)
+    print(f"{complex}: {texto[:control]}")
     print("\n\n\n\n")
 
-# CONST_REAL 
+print(tabla_simbolos)
