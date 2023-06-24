@@ -11,6 +11,7 @@ def tipo_caracter(caracter):
     else:
         return "otro"
 
+
 def es_identificador(cadena): 
     # Agregamos solamente dos estados ya que 3 es siempre falso y a partir de 2 termina la cadena
     # no se puede agregar algo más ya que te llevaría al 3 directamente (muere en 2)
@@ -19,12 +20,14 @@ def es_identificador(cadena):
             "letra": 1,
             "digito": 1,
             "comilla": 3,
+            "punto": 3,
             "otro": 3
         },
         {
             "letra": 1,
             "digito": 1,
             "comilla": 3,
+            "punto": 3,
             "otro": 2
         }
     ]
@@ -50,6 +53,7 @@ def es_identificador(cadena):
     # retorna una tupla determinando si es_identificador como primer posición, y la posición a la que lo deja como segunda
     if estado_actual == 2:
         return (True, posicion_actual - 1)
+        instalarents()
     else:
         return (False, 0)
 
@@ -103,33 +107,33 @@ def es_cadena(cadena):
 def es_real(cadena):
     estados = [
         {
-            "letra": 4,
+            "letra": 5,
             "digito": 1,
-            "comilla": 4,
-            "otro": 4,
-            "punto": 4,
+            "comilla": 5,
+            "punto": 5,
+            "otro": 5,
         },
         {
-            "letra": 4,
+            "letra": 5,
             "digito": 1,
-            "comilla": 4,
-            "otro": 4,
+            "comilla": 5,
             "punto": 2,
-        },
-        {
-            "letra": 4,
-            "digito": 3,  
-            "comilla": 4,
             "otro": 4,
-            "punto": 4,
         },
         {
-            "letra": 4,
+            "letra": 5,
             "digito": 3,
-            "comilla": 4,
-            "otro": 4,
-            "punto": 4,
+            "comilla": 5,
+            "punto": 5,
+            "otro": 5,
         },
+        {
+            "letra": 5,
+            "digito": 3,
+            "comilla": 5,
+            "punto": 5,
+            "otro": 4,
+        }
     ]
 
     posicion_actual = 0
@@ -138,30 +142,36 @@ def es_real(cadena):
     estado_actual = 0
 
     try:
-        while estado_actual != 4 and posicion_actual <= len(cadena):
+        while estado_actual not in (4,5):
             caracter_actual = cadena[posicion_actual]
             estado_actual = estados[estado_actual].get(tipo_caracter(caracter_actual)) 
             posicion_actual += 1
     except:
         pass
 
-    if estado_actual in (1,3):
+    if estado_actual == 4:
         return (True, posicion_actual - 1)
     else:
-        return (False, estado_actual)
+        return (False, 0)
 
 if __name__ == "__main__":
-    # Cómo aceptar una cadena que no termine en caracter especial ?? Ej: "Hola" que es distinto de "Hola "
-    #print(es_identificador(" hola mono"))
-    #print(es_identificador("hola mono"))
-    #cadena = "\"hola amiguito\")if algo"
-    #posicion = es_cadena(cadena)[1]
-    #print(cadena[posicion])
-
-    #print(es_cadena("\"aaaa\" ")) # "aaa"a
-
-    print(es_real("123"))
     print(es_real("123.12"))
-    print(es_real("123."))
-    print(es_real(".12"))
-    print(es_real("1.a3"))
+    print(es_real("123.0    pepe"))
+
+def es_simbolo_especial(cadena):
+    simbolos = {
+        "{" : "LLAVE_ABRE",
+        "}" : "LLAVE CIERRA",
+        ":" : "DOS_PUNTOS",
+        "," : "COMA",
+        "[" : "CORCHETE_ABRE",
+        "]" : "CORCHETE_CIERRA",
+        "=" : "ASIGNACION",
+        ";" : "PUNTO_COMA",
+        "+" : "SUMA",
+        "-" : "RESTA",
+        "*" : "MULTIPLICACION",
+        "/" : "DIVISION",
+        "(" : "PARENTESIS_ABRE",
+        ")" : "PARENTESIS_CIERRA",
+    }
