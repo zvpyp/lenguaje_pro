@@ -173,24 +173,34 @@ def es_real(cadena):
         return (False, 0)
 
 def es_simbolo_especial(cadena):
-    simbolos = {
-    "{" : "LLAVE_ABRE",
-    "}" : "LLAVE CIERRA",
-    ":" : "DOS_PUNTOS",
-    "," : "COMA",
-    "[" : "CORCHETE_ABRE",
-    "]" : "CORCHETE_CIERRA",
-    "=" : "ASIGNACION",
-    ";" : "PUNTO_COMA",
-    "+" : "SIGNO_MAX",
-    "-" : "SIGNO_MENOS",
-    "*" : "MULTIPLICACION",
-    "/" : "DIVISION",
-    "(" : "PARENTESIS_ABRE",
-    ")" : "PARENTESIS_CIERRA",
+    simbolos_dobles = {
+        "==": "IGUAL",
+        "<=": "MENOR_IGUAL",
+        ">=": "MAYOR_IGUAL",
     }
 
-    if cadena[0] in simbolos.keys():
+    simbolos = {
+        "{" : "LLAVE_ABRE",
+        "}" : "LLAVE CIERRA",
+        ":" : "DOS_PUNTOS",
+        "," : "COMA",
+        "[" : "CORCHETE_ABRE",
+        "]" : "CORCHETE_CIERRA",
+        "=" : "ASIGNACION",
+        ";" : "PUNTO_COMA",
+        "+" : "SIGNO_MAX",
+        "-" : "SIGNO_MENOS",
+        "*" : "MULTIPLICACION",
+        "/" : "DIVISION",
+        "(" : "PARENTESIS_ABRE",
+        ")" : "PARENTESIS_CIERRA",
+        "<" : "MENOR",
+        ">" : "MAYOR",
+    }
+
+    if cadena[0:2] in simbolos_dobles.keys():
+        return(True, 2, simbolos_dobles[cadena[0:2]])
+    elif cadena[0] in simbolos.keys():
         return (True, 1, simbolos[cadena[0]])
     
     return (False, 0)
