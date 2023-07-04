@@ -24,7 +24,10 @@ def obtener_siguiente_comp_lex(fuente, control, tabla_simbolos):
     nuevo_control = control
     complex = ""
 
-    if automatas.es_identificador(fuente)[0]:
+
+    if fuente == '':
+        complex = '$'
+    elif automatas.es_identificador(fuente)[0]:
         nuevo_control = automatas.es_identificador(fuente)[1]
         tabla_simbolos.setdefault(fuente[:nuevo_control], "ID")
         complex = "ID"
@@ -34,6 +37,10 @@ def obtener_siguiente_comp_lex(fuente, control, tabla_simbolos):
     elif automatas.es_cadena(fuente)[0]:
         nuevo_control = automatas.es_cadena(fuente)[1]
         complex = "CADENA"
+    elif automatas.es_simbolo_especial(fuente)[0]:
+        nuevo_control = automatas.es_simbolo_especial(fuente)[1]
+        complex = "SIMBOLO_ESPECIAL"
+        
     
      #print(f"{complex} : {fuente[:nuevo_control]}")
 
@@ -44,7 +51,7 @@ texto = open("aaa.txt").read()
 
 control = 0
 complex = ""
-for i in range(1, 8):
+while complex != '$':
     complex, control, texto = obtener_siguiente_comp_lex(texto, control, tabla_simbolos)
     print(f"{complex}: {texto[:control]}")
     print("\n\n\n\n")

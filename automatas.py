@@ -160,18 +160,23 @@ if __name__ == "__main__":
 
 def es_simbolo_especial(cadena):
     simbolos = {
-        "{" : "LLAVE_ABRE",
-        "}" : "LLAVE CIERRA",
-        ":" : "DOS_PUNTOS",
-        "," : "COMA",
-        "[" : "CORCHETE_ABRE",
-        "]" : "CORCHETE_CIERRA",
-        "=" : "ASIGNACION",
-        ";" : "PUNTO_COMA",
-        "+" : "SUMA",
-        "-" : "RESTA",
-        "*" : "MULTIPLICACION",
-        "/" : "DIVISION",
-        "(" : "PARENTESIS_ABRE",
-        ")" : "PARENTESIS_CIERRA",
+    "{" : "LLAVE_ABRE",
+    "}" : "LLAVE CIERRA",
+    ":" : "DOS_PUNTOS",
+    "," : "COMA",
+    "[" : "CORCHETE_ABRE",
+    "]" : "CORCHETE_CIERRA",
+    "=" : "ASIGNACION",
+    ";" : "PUNTO_COMA",
+    "+" : "SUMA",
+    "-" : "RESTA",
+    "*" : "MULTIPLICACION",
+    "/" : "DIVISION",
+    "(" : "PARENTESIS_ABRE",
+    ")" : "PARENTESIS_CIERRA",
     }
+
+    if cadena[0] in simbolos.keys():
+        return (True, 1)
+    
+    return (False, 0)
