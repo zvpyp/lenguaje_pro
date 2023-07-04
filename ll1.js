@@ -1,7 +1,8 @@
 /*
     TERMINALES: {
         var, {, }, id, :, , , real, array, [, ], body, =, const_real, ;, +, -, *, /,
-        read, write, cadena, (, ), if, operador_relacional, else, while, for, from, to
+        read, write, cadena, (, ), if, operador_relacional, else, while, for, from, to,
+        not, or, and
     }
 
  FORMA:
@@ -24,7 +25,7 @@
     producto ->         numero prod_factor                                              // prioridad 2
     prod_factor ->      * producto | / producto | epsylon
     numero ->           id id_factor | const_real | (exp_aritmetica) | -numero          // prioridad 1
-    id_factor ->        [exp_aritmetica] | epsylon
+    id_factor ->        [exp_aritmetica] | epsylon     
     elementos_array ->  exp_aritmetica array_factor
     array_factor ->     , elementos_array | epsylon
     lectura ->          read(cadena, id)
@@ -42,3 +43,17 @@
     ciclo_while ->      while condicion { sec_sentencias }
     ciclo_for ->        for id from exp_aritmetica to exp_aritmetica { sec_sentencias }
  */
+
+/*
+
+Primero(condicion) = Primero(conjuncion cond_or) = Primero(exp_relacional cond_and) = 
+Primero(exp_aritmetica) = id const_real ( - not {
+
+Primero(cond_or) = or  | { } 
+
+Primero(cond_and → and conjuncion) = and
+Primero(cond_and → epsilon) = or  | { } 
+
+Primero(exp_relacional) = id const_real ( - not {
+
+*/
