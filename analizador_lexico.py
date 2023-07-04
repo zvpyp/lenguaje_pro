@@ -11,6 +11,9 @@ tabla_simbolos = {
     'to' : 'FOR_HASTA',
     'read' : 'LECTURA',
     'write' : 'ESCRITURA',
+    'not':  'NOT',
+    'or': 'OR',
+    'and': 'AND',
 }
 
 # No sabemos si tendremos que separar en más tipos (como paréntesis, comillas)
@@ -179,9 +182,9 @@ def es_simbolo_especial(cadena):
     "]" : "CORCHETE_CIERRA",
     "=" : "ASIGNACION",
     ";" : "PUNTO_COMA",
-    "+" : "SUMA",   # podría cambiar a signo_suma
-    "-" : "RESTA",  # idem
-    "*" : "MULTIPLICACION", 
+    "+" : "SIGNO_MAX",
+    "-" : "SIGNO_MENOS",
+    "*" : "MULTIPLICACION",
     "/" : "DIVISION",
     "(" : "PARENTESIS_ABRE",
     ")" : "PARENTESIS_CIERRA",
