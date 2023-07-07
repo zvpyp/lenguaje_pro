@@ -238,9 +238,9 @@ def obtener_siguiente_comp_lex(fuente, control, tabla_simbolos):
     return (fuente, nuevo_control, complex, lexema)
 
 
-fuente = open("aaa.txt").read()
-
 if __name__ == "__main__":
+    fuente = open("aaa.txt").read()
+
     control = 0
     complex = ""
     while complex != '$' and complex != 'ERROR':
