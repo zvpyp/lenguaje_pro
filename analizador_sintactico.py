@@ -27,9 +27,10 @@ with open('TAS.csv', 'r') as archivo1:
 fuente = open("aaa.txt").read()
 control = 0
 complex = ""
+#print(f"Diccionario: " {dict_tas['dec_vars', 'ID']})
 while complex != '$' and complex != 'ERROR':
     fuente, control, complex, lexema = al.obtener_siguiente_comp_lex(fuente, control, al.tabla_simbolos)
-    print(f"{complex}: {lexema}")
+    print(f"{complex}: {complex}")
 
     # desapilamos el tope de la pila
 
@@ -39,9 +40,9 @@ while complex != '$' and complex != 'ERROR':
 
         # obtiene la producción separada de derecha a izquierda según la tupla
         print(f"tope: {tope}")
-        print(f"lexema {lexema}")
+        print(f"complex: {complex}")
 
-        elementos_apilados = dict_tas[tope, lexema].split(' ')
+        elementos_apilados = dict_tas[tope, complex].split(' ')
         elementos_apilados.reverse()
 
         for elemento in elementos_apilados:
@@ -52,7 +53,7 @@ while complex != '$' and complex != 'ERROR':
 
         tope = pila.pop()
 
-    if tope != lexema:
+    if tope != complex:
         print("¡¡¡ERROR SINTÁCTICO!!!")
         break
 

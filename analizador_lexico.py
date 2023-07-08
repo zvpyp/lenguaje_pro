@@ -219,14 +219,17 @@ def obtener_siguiente_comp_lex(fuente, control, tabla_simbolos):
         complex = '$'
     elif es_identificador(fuente)[0]:
         nuevo_control = es_identificador(fuente)[1]
-        tabla_simbolos.setdefault(fuente[:nuevo_control], "ID")
-        complex = "ID"
+        if fuente[:nuevo_control] not in tabla_simbolos:
+            tabla_simbolos.setdefault(fuente[:nuevo_control], "id")
+            complex = "id"
+        else:
+            complex = fuente[:nuevo_control]
     elif es_real(fuente)[0]:
         nuevo_control = es_real(fuente)[1]
-        complex = "CONST_REAL"
+        complex = "const_real"
     elif es_cadena(fuente)[0]:
         nuevo_control = es_cadena(fuente)[1]
-        complex = "CADENA"
+        complex = "cadena"
     elif es_simbolo_especial(fuente)[0]:
         nuevo_control = es_simbolo_especial(fuente)[1]
         complex = es_simbolo_especial(fuente)[2]
