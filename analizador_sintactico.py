@@ -9,7 +9,7 @@ TERMINALES = [
 
 dict_tas = {}
 # NOTA: corregir la TAS y agregar el $
-pila = ['programa']
+pila = ['$', 'programa']
 
 with open('TAS.csv', 'r') as archivo1:
     csv_tas = csv.reader(archivo1)
@@ -38,28 +38,37 @@ while complex != '$' and complex != 'ERROR':
 
     while tope not in TERMINALES:
 
+        
+
         # obtiene la producción separada de derecha a izquierda según la tupla
         print(f"tope: {tope}")
         print(f"complex: {complex}")
 
-        elementos_apilados = dict_tas[tope, complex].split(' ')
-        elementos_apilados.reverse()
+        if tope != "epsilon" and tope != "":
+            
 
-        for elemento in elementos_apilados:
-            pila.append(elemento)
+            elementos_apilados = dict_tas[tope, complex].split(' ')
+            elementos_apilados.reverse()
 
-        print(f"pila: {pila}")
-        input("eee")
+            for elemento in elementos_apilados:
+                pila.append(elemento)
 
-        tope = pila.pop()
+            print(f"pila: {pila}")
+           # input("eee")
 
+            tope = pila.pop()
+        else:
+            tope = pila.pop()
+
+    
     if tope != complex:
+        print(f"tope: {tope}")
+        print(f"complex: {complex}")
         print("¡¡¡ERROR SINTÁCTICO!!!")
         break
 
     print(pila)
-    input('aaaa \n')
-        
+
     
 
 

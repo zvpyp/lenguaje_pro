@@ -1,4 +1,4 @@
-,var,{,},id,:,",",real,array,[,],body, =,const_real,;, +, -, *, /,read,write,cadena,(,),if,operador_relacional,else,while,for,from,to,and,or,not,$
+,var,{,},id,:,",",real,array,[,],body,=,const_real,;,+,-,*,/,read,write,cadena,(,),if,operador_relacional,else,while,for,from,to,and,or,not,$
 programa,sec_dec_var cuerpo,,,,,,,,,,sec_dec_var cuerpo,,,,,,,,,,,,,,,,,,,,,,,
 sec_dec_var,var { dec_vars },,,,,,,,,,epsilon,,,,,,,,,,,,,,,,,,,,,,,
 dec_vars,,,,id : tipo var_factor,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

@@ -1,19 +1,19 @@
 tabla_simbolos = {
-    'var' : 'SECCION_VARIABLES',
-    'body': 'CUERPO', 
-    'for' : 'BUCLE_FOR',
-    'while' : 'BUCLE_WHILE',
-    'if' : 'CONDICIONAL_IF',
-    'else' : 'CONDICIONAL_ELSE',
-    'real' : 'TIPO_REAL',
-    'array' : 'TIPO_ARRAY',
-    'from' : 'FOR_DESDE',
-    'to' : 'FOR_HASTA',
-    'read' : 'LECTURA',
-    'write' : 'ESCRITURA',
-    'not':  'NOT',
-    'or': 'OR',
-    'and': 'AND',
+    'var' : 'var',
+    'body': 'body', 
+    'for' : 'for',
+    'while' : 'while',
+    'if' : 'if',
+    'else' : 'else',
+    'real' : 'real',
+    'array' : 'array',
+    'from' : 'from',
+    'to' : 'to',
+    'read' : 'read',
+    'write' : 'write',
+    'not':  'not',
+    'or': 'or',
+    'and': 'and',
 }
 
 # No sabemos si tendremos que separar en más tipos (como paréntesis, comillas)
@@ -174,28 +174,28 @@ def es_real(cadena):
 
 def es_simbolo_especial(cadena):
     simbolos_dobles = {
-        "==": "IGUAL",
-        "<=": "MENOR_IGUAL",
-        ">=": "MAYOR_IGUAL",
+        "==": "operador_relacional",
+        "<=": "operador_relacional",
+        ">=": "operador_relacional",
     }
 
     simbolos = {
-        "{" : "LLAVE_ABRE",
-        "}" : "LLAVE CIERRA",
-        ":" : "DOS_PUNTOS",
-        "," : "COMA",
-        "[" : "CORCHETE_ABRE",
-        "]" : "CORCHETE_CIERRA",
-        "=" : "ASIGNACION",
-        ";" : "PUNTO_COMA",
-        "+" : "SIGNO_MAX",
-        "-" : "SIGNO_MENOS",
-        "*" : "MULTIPLICACION",
-        "/" : "DIVISION",
-        "(" : "PARENTESIS_ABRE",
-        ")" : "PARENTESIS_CIERRA",
-        "<" : "MENOR",
-        ">" : "MAYOR",
+        "{" :  "{",
+        "}" : "}",
+        ":" : ":",
+        "," : ",",
+        "[" : "[",
+        "]" : "]",
+        "=" : "=",
+        ";" : ";",
+        "+" : "+",
+        "-" : "-",
+        "*" : "*",
+        "/" : "/",
+        "(" : "(",
+        ")" : ")",
+        "<" : "operador_relacional",
+        ">" : "operador_relacional",
     }
 
     if cadena[0:2] in simbolos_dobles.keys():
@@ -223,7 +223,7 @@ def obtener_siguiente_comp_lex(fuente, control, tabla_simbolos):
             tabla_simbolos.setdefault(fuente[:nuevo_control], "id")
             complex = "id"
         else:
-            complex = fuente[:nuevo_control]
+            complex = tabla_simbolos[fuente[:nuevo_control]]
     elif es_real(fuente)[0]:
         nuevo_control = es_real(fuente)[1]
         complex = "const_real"
