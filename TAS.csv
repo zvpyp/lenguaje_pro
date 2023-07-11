@@ -9,7 +9,7 @@ sec_sentencias,,,,sentencia ; sentencia_factor,,,,,,,,,,,,,,,sentencia ; sentenc
 sentencia_factor,,,epsilon,sec_sentencias,,,,,,,,,,,,,,,sec_sentencias,sec_sentencias,,,,sec_sentencias,,,sec_sentencias,sec_sentencias,,,,,,
 sentencia,,,,asignacion,,,,,,,,,,,,,,,lectura,escritura,,,,si_ent_sino,,,ciclo_while,ciclo_for,,,,,,
 asignacion,,,,id asig_factor,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-asig_factor,,,,,,,,,[ exp_aritmetica ] = exp_aritmetica,,, = valor_asignado,,,,,,,,,,,,,,,,,,,,,,
+asig_factor,,,,,,,,,[ exp_aritmetica ] = exp_aritmetica,,,= valor_asignado,,,,,,,,,,,,,,,,,,,,,,
 valor_asignado,,,,exp_aritmetica,,,,,arreglo,,,,exp_aritmetica,,,exp_artimetica,,,,,,exp_aritmetica,,,,,,,,,,,,
 arreglo,,,,,,,,,[ elementos_array ],,,,,,,,,,,,,,,,,,,,,,,,,
 exp_aritmetica,,,,producto arit_factor,,,,,,,,,producto arit_factor,,,producto arit_factor,,,,,,producto arit_factor,,,,,,,,,,,,
