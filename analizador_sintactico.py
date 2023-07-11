@@ -103,13 +103,16 @@ def analizador_predictivo(ruta_archivo):
     return arbol, estado
 
 
-def imprimir_arbol(nodo_raiz, desplazamiento=''):
-    print(desplazamiento, nodo_raiz)
+def arbol_a_texto(nodo_raiz, archivo, desplazamiento=''):
+    archivo.write(f"{desplazamiento}{nodo_raiz}\n")
 
     for hijo in nodo_raiz.hijos:
-        imprimir_arbol(hijo, desplazamiento+'  ')
+        arbol_a_texto(hijo, archivo, desplazamiento+'  ')
 
-arbol, estado = analizador_predictivo('prueba.txt')
+if __name__ == '__main__':
+    arbol, estado = analizador_predictivo('prueba.txt')
 
-imprimir_arbol(arbol)
-print(estado)
+    arbol_texto = open('arbol_texto.txt', "w+")
+
+    arbol_a_texto(arbol, arbol_texto)
+    print(estado)
