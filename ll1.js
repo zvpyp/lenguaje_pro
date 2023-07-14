@@ -20,11 +20,13 @@
     asig_factor ->      = valor_asignado | [exp_aritmetica] = exp_aritmetica
     valor_asignado ->   exp_aritmetica | arreglo
     arreglo ->          [elementos_array]
+
     exp_aritmetica ->   producto arit_factor                                            // prioridad 3
     arit_factor ->      + exp_aritmetica | - exp_aritmetica | epsylon
     producto ->         numero prod_factor                                              // prioridad 2
     prod_factor ->      * producto | / producto | epsylon
-    numero ->           id id_factor | const_real | (exp_aritmetica) | -numero          // prioridad 1
+    numero ->           id id_factor | const_real | (exp_aritmetica) | -numero | pow(exp_aritmetica, exp_aritmetica) | root(exp_aritmetica, exp_aritmetica)         // prioridad 1
+
     id_factor ->        [exp_aritmetica] | epsylon     
     elementos_array ->  exp_aritmetica array_factor
     array_factor ->     , elementos_array | epsylon
@@ -45,16 +47,6 @@
  */
 
 /*
-
-Primero(condicion) = Primero(conjuncion cond_or) = Primero(exp_relacional cond_and) = 
-Primero(exp_aritmetica) = id const_real ( - not {
-
-Primero(cond_or) = or  | { } 
-
-Primero(cond_and → and conjuncion) = and
-Primero(cond_and → epsilon) = or  | { } 
-
-Primero(exp_relacional) = id const_real ( - not {
 
 Especificación semántica
 
@@ -145,7 +137,7 @@ Especificación semántica
 
     producto ->         numero prod_factor                                              // prioridad 2
     prod_factor ->      * producto | / producto | epsylon
-    numero ->           id id_factor | const_real | (exp_aritmetica) | -numero          // prioridad 1
+    numero ->           id id_factor | const_real | (exp_aritmetica) | -numero | pow(exp_aritmetica, exp_aritmetica) | root(exp_aritmetica, exp_aritmetica)         // prioridad 1
         eval_numero(arbol, estado, resultado)
             if produccion = variable
                 eval_id_factor(arbol.hijos[2], estado, arbol.hijos[1].lexema, resultado)
@@ -166,7 +158,7 @@ Especificación semántica
                 eval_exp_aritmetica(arbol.hijos[2], estado, pos)
                 pos = floor(pos)
 
-                valor_arreglo_sub(estado, nombre_id, pos, resultado)
+                obtener_valor_arreglo_sub(estado, nombre_id, pos, resultado)
                 
     
     elementos_array ->  exp_aritmetica array_factor

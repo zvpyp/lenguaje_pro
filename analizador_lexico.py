@@ -14,6 +14,8 @@ tabla_simbolos = {
     'not':  'not',
     'or': 'or',
     'and': 'and',
+    'pow': 'pow',
+    'root': 'root'
 }
 
 # No sabemos si tendremos que separar en más tipos (como paréntesis, comillas)
