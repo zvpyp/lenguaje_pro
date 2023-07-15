@@ -14,6 +14,8 @@ tabla_simbolos = {
     'not':  'not',
     'or': 'or',
     'and': 'and',
+    'pow': 'pow',
+    'root': 'root'
 }
 
 # No sabemos si tendremos que separar en más tipos (como paréntesis, comillas)
@@ -80,24 +82,28 @@ def es_cadena(cadena):
     estados = [
         {
             "letra": 5,
+            "punto": 5,
             "digito": 5,
             "comilla": 1,
             "otro": 5,
         },
         {
             "letra": 3,
+            "punto": 3,
             "digito": 3,
             "comilla": 2,
             "otro": 3,
         },
         {
             "letra": 4,
+            "punto": 4,
             "digito": 4,  
             "comilla": 4,
             "otro": 4,
         },
         {
             "letra": 3,
+            "punto": 3,
             "digito": 3,
             "comilla": 2,
             "otro": 3,

@@ -4,7 +4,7 @@ import analizador_lexico as al
 TERMINALES = [
     "var", "{", "}", "id", ":", "," , "real", "array", "[", "]", "body", "=",
     "const_real", ";", "+", "-", "*", "/", "read", "write", "cadena", "(", ")",
-    "if", "operador_relacional", "else", "while", "for", "from", "to", "not", "or", "and"
+    "if", "operador_relacional", "else", "while", "for", "from", "to", "not", "or", "and", "pow", "root"
     ]
 
 class arbol_9ario:
@@ -50,10 +50,9 @@ def analizador_predictivo(ruta_archivo):
                 if lista_tas[i][j] != '':
                     # diccionario de la forma (variable, terminal) = produccion
                     if lista_tas[i][j] == 'epsilon':
-                        dict_tas[(lista_tas[i][0],lista_tas[0][j])] = ''
+                        dict_tas[((lista_tas[i][0]).strip(),lista_tas[0][j].strip())] = ''
                     else:
-                        dict_tas[(lista_tas[i][0],lista_tas[0][j])] = lista_tas[i][j]
-
+                        dict_tas[(lista_tas[i][0].strip(),lista_tas[0][j].strip())] = lista_tas[i][j].strip()
 
     fuente = open(ruta_archivo).read()
     control = 0
@@ -78,7 +77,6 @@ def analizador_predictivo(ruta_archivo):
 
                 fuente, control, complex, lexema = al.obtener_siguiente_comp_lex(fuente, control, al.tabla_simbolos)
         elif tope.simbolo == '$':
-            print('fin')
             if complex == '$':
                 estado = 'exito'
             else:
