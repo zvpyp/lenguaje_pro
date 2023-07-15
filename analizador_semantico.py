@@ -299,13 +299,9 @@ def eval_ciclo_for(arbol, estado):
         asignar_valor(estado, arbol.hijos[1].lexema, aux, -1)
         eval_sec_sentencias(arbol.hijos[7], estado)
 
-
-
-
-
 estado_semantico = {}
 
-arbol, estado = sintactico.analizador_predictivo('programa1.js')
+arbol, estado = sintactico.analizador_predictivo('programa3.js')
 
 if estado == 'exito':
     arbol_texto = open('arbol_texto.txt', '+w')
