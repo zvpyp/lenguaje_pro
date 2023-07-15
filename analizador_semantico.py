@@ -10,20 +10,20 @@ def agregar_variable(estado, nombre_id, tipo, tam):
 def asignar_valor(estado, nombre_id, valor, indice):
     if indice == -1:
         # caso real
-        estado[nombre_id] = valor
+        estado[nombre_id] = float(valor)
     else:
         # array
         # hay que verificar que en esa posición exista el array
-        estado[nombre_id][indice] = valor
+        estado[nombre_id][indice] = float(valor)
 
 def obtener_valor(estado, nombre_id, pos=-1):
     if pos == -1:
         # caso real
-        valor = float(estado[nombre_id])
+        valor = estado[nombre_id]
     else:
         # caso array
         # verificar que exista
-        valor = float(estado[nombre_id][pos])
+        valor = estado[nombre_id][pos]
     return valor
 
 def eval_programa(arbol, estado):
@@ -132,25 +132,20 @@ def eval_arit_factor(arbol, estado, operando1):
     return resultado
 
 def eval_producto(arbol, estado):
+
+
     operando1 = eval_numero(arbol.hijos[0], estado)
     resultado = eval_prod_factor(arbol.hijos[1], estado, operando1)
     return resultado
 
 def eval_prod_factor(arbol, estado, operando1):
-    """
-    print('en prod_factor')
-    for hijo in arbol.hijos:
-        print(hijo)
-    input('awa')
-    """
-
     if arbol.hijos:
         primer_hijo = arbol.hijos[0]
         if primer_hijo.simbolo == '*':
-            operando2 = eval_exp_aritmetica(arbol.hijos[1], estado)
+            operando2 = eval_producto(arbol.hijos[1], estado)
             resultado = operando1 * operando2
         elif primer_hijo.simbolo == '/':
-            operando2 = eval_exp_aritmetica(arbol.hijos[1], estado)
+            operando2 = eval_producto(arbol.hijos[1], estado)
             resultado = operando1 / operando2
     else:
         resultado = operando1
@@ -158,11 +153,6 @@ def eval_prod_factor(arbol, estado, operando1):
 
 
 def eval_numero(arbol, estado):
-    for hijo in arbol.hijos:
-        print(hijo)
-    input('algo')
-
-
     hijo = arbol.hijos[0]
 
     if hijo.simbolo == 'id':
@@ -194,18 +184,21 @@ def eval_id_factor(arbol, estado, nombre_id):
     return resultado
 
 def eval_elementos_array(arbol, estado, array):
-    array.append(eval_exp_aritmetica(arbol.hijos[0]))
+    array.append(eval_exp_aritmetica(arbol.hijos[0], estado))
     eval_array_factor(arbol.hijos[1], estado, array)
 
 def eval_array_factor(arbol, estado, array):
     if arbol.hijos:
-        eval_elementos_array(arbol, estado, array)
+        eval_elementos_array(arbol.hijos[1], estado, array)
 
 def eval_lectura(arbol, estado):
-   cadena = arbol.hijos[2].lexema
-   nombre_id = arbol.hijos[4].lexema
-   valor = input(cadena)
-   asignar_valor(estado, nombre_id, valor, -1)
+    cadena = arbol.hijos[2].lexema
+    nombre_id = arbol.hijos[4].lexema
+
+    print
+
+    valor = input(cadena)
+    asignar_valor(estado, nombre_id, valor, -1)
 
 def eval_escritura(arbol, estado):
     eval_args_escribir(arbol.hijos[2], estado)
@@ -225,9 +218,9 @@ def eval_arg_escribir(arbol, estado):
     if hijo.simbolo == 'cadena':
         print(hijo.lexema, end=' ')
     elif hijo.simbolo == 'exp_aritmetica':
-        print(eval_exp_aritmetica(arbol.hijos[0],estado), end=' ')
+        print(eval_exp_aritmetica(hijo,estado), end=' ')
     else:
-        print(eval_arreglo(arbol.hijos[0], estado), end=' ')
+        print(eval_arreglo(hijo, estado), end=' ')
 
 def eval_si_ent_sino(arbol, estado):
     if eval_condicion(arbol.hijos[1], estado):
@@ -301,21 +294,24 @@ def eval_ciclo_for(arbol, estado):
 
     if inicio > fin:
         step = -1
-    
-    for _ in range(inicio, fin, step):
+
+    for aux in range(inicio, fin, step):
+        asignar_valor(estado, arbol.hijos[1].lexema, aux, -1)
         eval_sec_sentencias(arbol.hijos[7], estado)
+
 
 
 
 
 estado_semantico = {}
 
-arbol, estado = sintactico.analizador_predictivo('prueba.js')
+arbol, estado = sintactico.analizador_predictivo('programa1.js')
 
-arbol_texto = open('arbol_texto.txt', '+w')
+if estado == 'exito':
+    arbol_texto = open('arbol_texto.txt', '+w')
 
-sintactico.arbol_a_texto(arbol, arbol_texto)
+    sintactico.arbol_a_texto(arbol, arbol_texto)
 
-eval_programa(arbol, estado_semantico)
-
-print(estado)
+    eval_programa(arbol, estado_semantico)
+else:
+    print(estado)

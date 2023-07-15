@@ -7,10 +7,12 @@ var {
 }
 body {
     variable1 = 7.9;
-    variable2 = 11.1 + (2.2 * 3.4 - 2) / 6;
-    variable3 = [1.1, 2.2, 3.3, 4.4, 5.5];
+    variable2 = 11.1;
 
-    read("mensaje", variable4);
+    read("escribime algo y lo guardo", variable4);
+    write(variable4);
+    write(variable4);
+    write(variable4);
     write("mensaje", variable1, 5 + 6.1, [2.2, 5.1]);
 
     if variable1 == variable2 {
@@ -20,8 +22,9 @@ body {
         write("nashee");
     };
 
-    while variable2 > variable3 {
+    while variable2 > variable3[1] {
         write("sos ", 3*5, " veces alto capo");
+        variable3[1] = variable2 + 1;
     };
 
     for id from 0 to 10 {

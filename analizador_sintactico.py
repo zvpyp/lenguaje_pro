@@ -77,7 +77,6 @@ def analizador_predictivo(ruta_archivo):
 
                 fuente, control, complex, lexema = al.obtener_siguiente_comp_lex(fuente, control, al.tabla_simbolos)
         elif tope.simbolo == '$':
-            print('fin')
             if complex == '$':
                 estado = 'exito'
             else:
