@@ -216,7 +216,7 @@ def eval_arg_escribir(arbol, estado):
     hijo = arbol.hijos[0]
 
     if hijo.simbolo == 'cadena':
-        print(hijo.lexema, end=' ')
+        print(hijo.lexema.strip('\"'), end=' ')
     elif hijo.simbolo == 'exp_aritmetica':
         print(eval_exp_aritmetica(hijo,estado), end=' ')
     else:
@@ -301,7 +301,7 @@ def eval_ciclo_for(arbol, estado):
 
 estado_semantico = {}
 
-arbol, estado = sintactico.analizador_predictivo('programa3.js')
+arbol, estado = sintactico.analizador_predictivo('distancia_maxima.js')
 
 if estado == 'exito':
     arbol_texto = open('arbol_texto.txt', '+w')

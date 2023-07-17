@@ -26,7 +26,7 @@ body {
         aux = aux + pow(array1[i] - prom, 2);
     };
 
-    varianza = aux/n;
+    varianza = root(aux/n, 2);
 
     write("el promedio es de ", prom);
     write("la varianza es de ", varianza);

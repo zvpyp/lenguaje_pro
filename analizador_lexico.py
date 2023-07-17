@@ -20,7 +20,7 @@ tabla_simbolos = {
 
 # No sabemos si tendremos que separar en más tipos (como paréntesis, comillas)
 def tipo_caracter(caracter):
-    if caracter.isalpha():
+    if caracter.isalpha() or caracter == '_':
         return "letra"
     elif caracter.isdigit():
         return "digito"

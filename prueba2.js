@@ -4,5 +4,6 @@ var {
 }
 body {
     v2 = 5;
-    write(v1);
+    v1 = [7.2, 3];
+    write(v1, v2, "eee");
 }
