@@ -16,7 +16,7 @@
     sentencia_factor -> sec_sentencias | epsylon
     sentencia ->        asignacion | lectura | escritura | si_ent_sino |
                         ciclo_while | ciclo_for
-    asignacion ->       id asig_factor
+    <asignacion> ::=       "id" <asig_factor>
     asig_factor ->      = valor_asignado | [exp_aritmetica] = exp_aritmetica
     valor_asignado ->   exp_aritmetica | arreglo
     arreglo ->          [elementos_array]

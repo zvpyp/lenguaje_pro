@@ -1,0 +1,34 @@
+var {
+    n: real,
+    aux: real,
+    distancia_max: real,
+    array1: array[100],
+    array2: array[100],
+    i: real
+}
+body {
+    read("ingrese tamaño de los arrays: ", n);
+
+    for i from 0 to n {
+        read("ingresa un numero para el primer array: ", aux);
+        array1[i] = aux;
+    };
+
+    aux = 0;
+
+    for i from 0 to n {
+        read("ingresa un numero para el segundo array: ", aux);
+        array2[i] = aux;
+    };
+
+    distancia_max = 0;
+
+    for i from 0 to n {
+        aux = root(pow(array1[i] - array2[i], 2), 2);
+        if aux > distancia_max {
+            distancia_max = aux;
+        };
+    };
+
+    write("la distancia máxima es de: ", distancia_max);
+}
