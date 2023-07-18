@@ -7,6 +7,8 @@ var {
     i: real
 }
 body {
+    write("Calcula la distancia máxima entre dos vectores");
+
     read("ingrese tamaño de los arrays: ", n);
 
     for i from 0 to n {

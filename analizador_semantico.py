@@ -301,12 +301,12 @@ def eval_ciclo_for(arbol, estado):
 
 estado_semantico = {}
 
-arbol, estado = sintactico.analizador_predictivo('distancia_maxima.js')
+# Entre las comillas, elegir el archivo .np
+arbol, estado = sintactico.analizador_predictivo('distancia.np')
 
 if estado == 'exito':
-    arbol_texto = open('arbol_texto.txt', '+w')
-
-    sintactico.arbol_a_texto(arbol, arbol_texto)
+    #arbol_texto = open('arbol_texto.txt', '+w')
+    #sintactico.arbol_a_texto(arbol, arbol_texto)
 
     eval_programa(arbol, estado_semantico)
 else:

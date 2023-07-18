@@ -8,6 +8,8 @@ var {
 }
 body {
 
+    write("Calcula la distancia entre dos vectores");
+
     read("ingrese tamaño de los arrays: ", n);
 
     for i from 0 to n {

@@ -7,7 +7,9 @@ var {
 }
 body {
 
-    read("ingrese tamaño del array: ", n);
+    write("Calcula el promedio y la varianza de los elementos de una lista");
+
+    read("ingrese tamaño de la lista: ", n);
 
     for i from 0 to n {
         read("ingresa un numero: ", aux);
