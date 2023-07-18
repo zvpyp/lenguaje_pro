@@ -1,0 +1,38 @@
+NOTACIÓN DE BACKUS-NAUR:
+
+    <programa> ::=         <sec_dec_var> <cuerpo>
+    <sec_dec_var> ::=      "var" "{" <dec_vars> "}" | "epsilon"
+    <dec_vars> ::=         "id" ":" <tipo> <var_factor>
+    <var_factor> ::=       "," <dec_vars> | "epsilon"
+    <tipo> ::=             "real" | "array" "[" <exp_aritmetica> "]"
+    <cuerpo> ::=           "body" "{" <sec_sentencias>  "}"
+    <sec_sentencias> ::=   <sentencia> ";" <sentencia_factor>
+    <sentencia_factor>::=  <sec_sentencias> | "epsilon"
+    <sentencia> ::=        <asignacion> | <lectura> | <escritura> | <si_ent_sino> |
+                        <ciclo_while> | <ciclo_for>
+    <asignacion> ::=      "id" <asig_factor>
+    <asig_factor> ::=      "=" <valor_asignado> | "[" <exp_aritmetica> "]" "=" <exp_aritmetica>
+    <valor_asignado> ::=   <exp_aritmetica> | <arreglo>
+    <arreglo> ::=          "[" <elementos_array> "]"
+    <exp_aritmetica> ::=   <producto> <arit_factor>                                           
+    <arit_factor> ::=      "+" <exp_aritmetica> | "-" <exp_aritmetica> | "epsilon"
+    <producto> ::=         <numero> <prod_factor>                                              
+    <prod_factor> ::=      "*" <producto> | "/" <producto> | epsilon
+    <numero> ::=           "id" <id_factor> | "const_real" | "(" <exp_aritmetica> ")" | "-" <numero> | "pow"   "("<exp_aritmetica> "," <exp_aritmetica> ")" | "root" "(" <exp_aritmetica> ","  <exp_aritmetica> ")"   
+    <id_factor> ::=        "[" <exp_aritmetica> "]" | "epsilon"     
+    <elementos_array> ::=  <exp_aritmetica> <array_factor>
+    <array_factor> ::=     ","  <elementos_array> | "epsilon"
+    <lectura> ::=          "read" "(" "cadena" "," "id" ")"
+    <escritura> ::=        "write" "(" <args_escribir> ")"
+    <args_escribir> ::=    <arg_escribir> <args_esc_factor>
+    <args_esc_factor>::=  "," <args_escribir> | "epsilon"
+    <arg_escribir> ::=     "cadena" | <exp_aritmetica> | <arreglo>
+    <si_ent_sino> ::=      "if" <condicion> "{" <sec_sentencias> "}" <sino>
+    <sino> ::=             "else" "{" <sec_sentencias> "}" | "epsilon"
+    <condicion> ::=        <conjuncion> <cond_or>
+    <cond_or> ::=          "or" <condicion> | "epsilon"
+    <conjuncion> ::=       <exp_relacional> <cond_and>
+    <cond_and> ::=         "and" <conjuncion> | "epsilon"
+    <exp_relacional> ::=   <exp_aritmetica> "operador_relacional" <exp_aritmetica> | "not" <exp_relacional> | "{" <condicion> "}"
+    <ciclo_while> ::=      "while" <condicion> "{" <sec_sentencias> "}"
+    <ciclo_for> ::=        "for" "id" "from" <exp_aritmetica> "to" <exp_aritmetica> "{" <sec_sentencias> "}"
